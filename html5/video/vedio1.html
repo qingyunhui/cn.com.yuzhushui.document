@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="jquery-1.10.2.min.js"></script>
+<title>视频</title>
+</head>
+	<video width="320" id="myVideo" height="240"><!--如果video标签中有controls属性存在，则会video会使用浏览器自带的音频控件-->
+      <source src="http://www.runoob.com/try/demo_source/mov_bbb.mp4" type="video/mp4">
+      <p>您的浏览器不支持Video标签。</p>
+    </video>
+<body>
+<script>
+
+	var video;
+	
+	/**
+	 *<p>获取video对象</p>
+	 *@return video对象
+	 */
+	function getVideo(){
+	   video=document.getElementById("myVideo");
+	}
+	/**
+	 *<p>设置video是否使用音频控件</p>
+	 *@paramters defaults 取值(true,false)
+	 *@return video对象
+	 */
+	function setVideoControls(defaults){
+		if(!video) getVideo()
+		video.controls=defaults;
+	}
+	
+	/**
+	 *<p>判断浏览器是否支付指定类型的音频格式</p>
+	 */
+	function browserSupportByTypes(){
+		 //arguments变量是被隐式绑定到每个函数体内的,注意是每一个函数。调用方式:browserSupportByTypes("video/ogg","video/mp4");
+		if(!video) getVideo();
+		if(arguments && arguments.length>0){
+			for(var i=0;i<arguments.length;i++){
+				console.log("arg:",arguments[i]);
+				var result=video.canPlayType(arguments[i]);
+				if('probably'==result || 'maybe'==result){
+					console.log("你的浏览器支持:"+arguments[i]+"格式的音频。");
+				}else{
+					console.log("抱歉，你的浏览器不支持:"+arguments[i]+"格式的音频。");
+				}
+			}
+		}
+	}
+	
+	$(function(){
+	
+		browserSupportByTypes("video/ogg","video/mp4")
+		
+	   
+	});
+	
+	
+	/** canPlayType() 方法浏览器是否能播放指定的音频/视频类型。
+		canPlayType() 方法可返回下列值之一：
+		"probably" - 浏览器最可能支持该音频/视频类型
+		"maybe" - 浏览器也许支持该音频/视频类型
+		"" - （空字符串）浏览器不支持该音频/视频类型
+	**/
+	
+	/**
+	 
+	  更改视频来源，并重载视频：
+		document.getElementById("mp4_src").src="movie.mp4";
+		document.getElementById("ogg_src").src="movie.ogg";
+		document.getElementById("video1").load();
+	 
+		 load() 方法重新加载音频/视频元素。
+		 load() 方法用于在更改来源或其他设置后对音频/视频元素进行更新。
+	 
+	 */
+	 
+	 /**
+	  
+	    var myVideo=document.getElementById("video1");
+		function playVid()
+		  {
+		  myVideo.play();
+		  }
+		function pauseVid()
+		  {
+		  myVideo.pause();
+	  
+	 	 定义和用法
+		play() 方法开始播放当前的音频或视频。
+	  
+	 **/
+	
+	/**
+	
+		带有播放和暂停按钮的一段视频：
+		var myVideo=document.getElementById("video1");
+		function playVid()
+		  {
+		  myVideo.play();
+		  }
+		function pauseVid()
+		  {
+		  myVideo.pause();
+		  }
+		  
+		  定义和用法
+		pause() 方法停止（暂停）当前播放的音频或视频。
+	*/
+	
+	/**
+	  启用自动播放，并重载视频：
+		myVid=document.getElementById("video1");
+		myVid.autoplay=true;
+		myVid.load();
+		autoplay 属性设置或返回音视频是否在加载后即开始播放。
+	*/
+	
+	/**
+		
+		获得视频的第一段缓冲范围（部分），以秒计：
+	myVid=document.getElementById("video1");
+	alert("Start: " + myVid.buffered.start(0)
+	+ " End: " + myVid.buffered.end(0));
+		
+		定义和用法
+	buffered 属性返回 TimeRanges 对象。
+	TimeRanges 对象表示用户的音视频缓冲范围。
+	缓冲范围指的是已缓冲音视频的时间范围。如果用户在音视频中跳跃播放，会得到多个缓冲范围。
+		
+		TimeRanges 对象属性：
+		length - 获得音视频中已缓冲范围的数量
+		start(index) - 获得某个已缓冲范围的开始位置
+		end(index) - 获得某个已缓冲范围的结束位置
+		注释：首个缓冲范围的下表是 0。
+	*/
+	
+	/**
+	
+	检测该视频是否有媒体控制器：
+	myVid=document.getElementById("video1");
+	alert("Controller: " + myVid.controller);
+	
+	controller 属性返回音视频的当前媒体控制器。
+默认地，音视频元素不会有媒体控制器。如果规定了媒体控制器，controller 属性将以 MediaController 的形式返回它。
+	
+	MediaController 对象属性/方法：
+		buffered - 获得音视频的缓冲范围
+		seekable - 或者音视频的可寻址范围
+		duration - 获得音视频的时长
+		currentTime - 获得或设置音视频的当前播放位置
+		paused - 检测音视频是否已暂停
+		play() - 播放音视频
+		pause() - 暂停音视频
+		played - 检测音视频是否已播放过
+		defaultPlaybackRate - 获得或设置音视频的默认播放速率
+		playbackRate - 获得或设置音视频的当前播放速率
+		volume - 获得或设置音视频的音量
+		muted - 获得或设置音视频是否已静音
+		
+	*/
+	
+	/**
+	 获得当前视频的 URL：
+	myVid=document.getElementById("video1");
+	alert(myVid.currentSrc);
+	
+	定义和用法
+	currentSrc 熟悉返回当前音频/视频的 URL。
+	如果未设置音频/视频，则返回空字符串。
+	 
+	*/
+	
+	/**
+	
+	将时间位置设置为 5 秒：
+	myVid=document.getElementById("video1");
+	myVid.currentTime=5;
+	
+	定义和用法
+	currentTime 属性设置或返回音频/视频播放的当前位置（以秒计）。
+	当设置该属性时，播放会跳跃到指定的位置。
+	*/
+	
+	/**
+		设置视频默认静音：只有 Google Chrome 支持 defaultMuted 属性。
+		myVid=document.getElementById("video1");
+		myVid.defaultMuted=true;
+		
+		defaultMuted 属性设置或返回音频/视频是否默认静音。
+	设置该属性仅会改变默认的静音状态，而不是当前的。要改变当前的静音状态，请使用 muted 属性。
+	*/
+	
+	/**
+		把视频设置为默认低速播放：只有 Google Chrome 支持 defaultPlaybackRate 属性。
+	myVid=document.getElementById("video1");
+	myVid.defaultPlaybackRate=0.5;
+	
+	定义和用法
+	defaultPlaybackRate 属性设置或返回音频/视频的默认播放速度。
+	设置该属性仅会改变默认的播放速度，而不是当前的。要改变当前的播放速度，请使用 playbackRate 属性。
+	
+	playbackspeed
+	指示音频/视频的默认播放速度。
+	例值：
+	1.0 正常速度
+	0.5 半速（更慢）
+	2.0 倍速（更快）
+	-1.0 向后，正常速度
+	-0.5 向后，半速
+	*/
+	
+	/**
+	
+	获得当前视频的长度：
+	myVid=document.getElementById("video1");
+	alert(myVid.duration);
+	
+	定义和用法
+	duration 属性返回当前音频/视频的长度，以秒计。
+	如果未设置音频/视频，则返回 NaN (Not-a-Number)。
+	*/
+	
+	/**
+	检查视频播放是否已结束：
+	myVid=document.getElementById("video1");
+	alert(myVid.ended);
+	
+	定义和用法
+	ended 属性返回音频/视频是否已结束。
+	如果播放位置位于音频/视频的结尾时，则音频/视频已结束。
+	布尔值	true|false。如果播放已结束，则返回 true。否则返回 false。
+	*/
+	
+	/**
+		将视频设置为循环播放：
+	myVid=document.getElementById("video1");
+	myVid.loop=true;
+	定义和用法
+	loop 属性设置或返回音频/视频是否应该在结束时再次播放。
+	
+	true	指示音频/视频应该在结束时再次播放。
+	false	默认。指示音频/视频不应该在结束时再次播放。
+	
+	*/
+	
+	/**
+	
+		关闭视频的声音：
+	myVid=document.getElementById("video1");
+	myVid.muted=true;
+	
+	定义和用法
+	muted 属性设置或返回音频/视频是否应该被静音（关闭声音）。
+	
+	true	指示应该关闭音频/视频的声音。
+	false	默认。指示应该打开音频/视频的声音。
+	*/
+	
+	/**
+		获得视频的当前网络状态：
+	myVid=document.getElementById("video1");
+	alert(myVid.networkState);
+	
+	定义和用法
+	networkState 属性返回音频/视频的当前网络状态（activity）。
+	
+	表示音频/视频元素的当前网络状态：
+	0 = NETWORK_EMPTY - 音频/视频尚未初始化
+	1 = NETWORK_IDLE - 音频/视频是活动的且已选取资源，但并未使用网络
+	2 = NETWORK_LOADING - 浏览器正在下载数据
+	3 = NETWORK_NO_SOURCE - 未找到音频/视频来源
+	*/
+	
+	/**
+		检查视频是否已暂停：
+	myVid=document.getElementById("video1");
+	alert(myVid.paused);
+	
+	定义和用法
+	paused 属性返回音频/视频是否已暂停。 
+	true 指示音频/视频已暂停。否则为 false。
+	*/
+	
+	/**
+		获得视频中以秒计的首段已播放的范围（部分）：
+	myVid=document.getElementById("video1");
+	alert("Start: " + myVid.played.start(0) + " End: " + myVid.played.end(0));
+	
+	定义和用法
+	played 属性返回 TimeRanges 对象。
+	TimeRanges 对象表示用户已经播放或看到的音频/视频范围。
+	已播范围指的是被播放音频/视频的时间范围。如果用户在音频/视频中跳跃，则会获得多个播放范围。
+	
+	TimeRanges 对象
+	
+	表示音频/视频的已播范围。
+	TimeRanges 对象的属性：
+	length - 获得音频/视频中已播范围的数量
+	start(index) - 获得某个已播范围的开始位置
+	end(index) - 获得某个已播范围的结束位置
+	注释：首段已播范围的下标是 0。
+	*/
+	
+	/**
+	页面一旦加载，就开始加载视频：
+	myVid=document.getElementById("video1");
+	myVid.preload="auto";
+
+	定义和用法
+	preload 属性设置或返回是否在页面加载后立即加载音频/视频。
+	
+	auto	指示一旦页面加载，则开始加载音频/视频。
+	metadata	指示当页面加载后仅加载音频/视频的元数据。
+	none	指示页面加载后不应加载音频/视频。
+	*/
+	
+	/*
+		获得视频的就绪状态：
+	myVid=document.getElementById("video1");
+	alert(myVid.readyState);
+	
+	定义和用法
+	readyState 属性返回音频/视频的当前就绪状态。
+	就绪状态指示音频/视频是否已准备好播放。
+	
+	表示音频/视频元素的就绪状态：
+	0 = HAVE_NOTHING - 没有关于音频/视频是否就绪的信息
+	1 = HAVE_METADATA - 关于音频/视频就绪的元数据
+	2 = HAVE_CURRENT_DATA - 关于当前播放位置的数据是可用的，但没有足够的数据来播放下一帧/毫秒
+	3 = HAVE_FUTURE_DATA - 当前及至少下一帧的数据是可用的
+	4 = HAVE_ENOUGH_DATA - 可用数据足以开始播放
+	*/
+	
+	/**
+	获得首个以秒计的视频可寻址范围（部分）：
+	myVid=document.getElementById("video1");
+	alert("Start: " + myVid.seekable.start(0) + " End: " + myVid.seekable.end(0));
+
+	定义和用法
+	seekable 属性返回 TimeRanges 对象。
+	TimeRanges 对象表示音频/视频中用户可寻址的范围。
+	可寻址范围指的是用户在音频/视频中可寻址（移动播放位置）的时间范围。
+	对于流视频，通常可以寻址到视频中的任何位置，即使其尚未完成缓冲。
+	
+	TimeRanges 对象	
+	表示音频/视频中的可寻址部分。
+	TimeRanges 对象的属性：
+	length - 获得音频/视频中可寻址范围的数量
+	start(index) - 获得可寻址范围的开始位置
+	end(index) - 获得可寻址范围的结束位置
+	注释：第一个可寻址范围的下标是 index 0。
+	*/
+	
+	/**
+	
+		显示出用户是否正在视频中寻址：true|false。如果用户正在寻址，则为 true。否则为 false。
+	myVid=document.getElementById("video1");
+	document.getElementById("span1").innerHTML=("Seeking: " + myVid.seeking);
+	
+	定义和用法
+	seeking 属性返回用户目前是否在音频/视频中寻址。
+	寻址中（Seeking）指的是用户在音频/视频中移动/跳跃到新的位置。
+	*/
+	
+	/**
+		改变视频的来源：
+	myVid=document.getElementById("video1");
+	myVid.src="movie.ogg";
+	定义和用法
+	src 属性设置或返回音频/视频的当前来源。
+
+	URL	
+	规定音频/视频来源的 URL。
+	可能的值：
+	绝对 URL - 指向另一个网站（比如 src="http://example.com/movie.ogg"）
+	相对 URL - 指向网站内的某个文件（比如 src="/data/movie.ogg"）
+
+	*/
+	
+	/**
+		将视频音量设置为 20%：
+	myVid=document.getElementById("video1");
+	myVid.volume=0.2;
+	
+	定义和用法
+	volume 属性设置或返回音频/视频的当前音量。
+	
+	volumevalue	
+	规定音频/视频的当前音量。必须是介于 0.0 与 1.0 之间的数字。
+	例值：
+	1.0 是最高音量（默认）
+	0.5 是一半音量 （50%）
+	0.0 是静音
+	*/
+	
+	/**
+		提示该视频已准备好开始播放：
+	myVid=document.getElementById("video1");
+	myVid.oncanplay=alert("Can start playing video");
+	
+	定义和用法
+	当浏览器能够开始播放指定的音频/视频时，发生 canplay 事件。
+	当音频/视频处于加载过程中时，会依次发生以下事件：
+	loadstart
+	durationchange
+	loadedmetadata
+	loadeddata
+	progress
+	canplay
+	canplaythrough
+	
+	语法
+	在 HTML 中：
+	<audio|video oncanplay="SomeJavaScriptCode">
+	在 JavaScript 中：
+	audio|video.oncanplay=SomeJavaScriptCode;
+	使用 addEventListener()：
+	audio|video.addEventListener("canplay", function()
+	  {
+	  //SomeJavaScriptCode
+	  }
+	);
+	*/
+	
+	/**
+	
+		提示视频能够不停顿地一直播放：
+	myVid=document.getElementById("video1");
+	myVid.oncanplaythrough=alert("Can play through video without stopping");
+	
+	定义和用法
+	当浏览器预计能够在不停下来进行缓冲的情况下持续播放指定的音频/视频时，会发生 canplaythrough 事件。
+	当音频/视频处于加载过程中时，会依次发生以下事件：
+	loadstart
+	durationchange
+	loadedmetadata
+	loadeddata
+	progress
+	canplay
+	canplaythrough
+	
+	语法
+	在 HTML 中：
+	<audio|video oncanplaythrough="SomeJavaScriptCode">
+	在 JavaScript 中：
+	audio|video.oncanplaythrough=SomeJavaScriptCode;
+	使用 addEventListener()：
+	audio|video.addEventListener("canplaythrough", function()
+	  {
+	  //SomeJavaScriptCode
+	  }
+	);
+	*/
+	
+	/**
+		提示视频正在下载中：
+	myVid=document.getElementById("video1");
+	myVid.onprogress=alert("Starting to load video");
+	
+	定义和用法
+	当浏览器正在下载指定的音频/视频时，会发生 progress 事件。
+	当音频/视频处于加载过程中时，会依次发生以下事件：
+	loadstart
+	durationchange
+	loadedmetadata
+	loadeddata
+	progress
+	canplay
+	canplaythrough
+	
+	语法
+	在 HTML 中：
+	<audio|video onprogress="SomeJavaScriptCode">
+	在 JavaScript 中：
+	audio|video.onprogress=SomeJavaScriptCode;
+	使用 addEventListener()：
+	audio|video.addEventListener("progress", function()
+	  {
+	  //SomeJavaScriptCode
+	  }
+	);
+	*/
+	
+</script>
+</body>
+</html>
