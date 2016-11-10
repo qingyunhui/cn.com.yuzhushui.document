@@ -47,10 +47,8 @@
 				console.log("arg:",arguments[i]);
 				var result=video.canPlayType(arguments[i]);
 				if('probably'==result || 'maybe'==result){
-					alert("你的浏览器支持:"+arguments[i]+"格式的音频。");
 					console.log("你的浏览器支持:"+arguments[i]+"格式的音频。");
 				}else{
-					alert("你的浏览器支持:"+arguments[i]+"格式的音频。");
 					console.log("抱歉，你的浏览器不支持:"+arguments[i]+"格式的音频。");
 				}
 			}
