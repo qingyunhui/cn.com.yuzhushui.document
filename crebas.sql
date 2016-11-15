@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/10/19 14:22:47                          */
+/* Created on:     2016/11/15 23:29:28                          */
 /*==============================================================*/
 
 
@@ -271,6 +271,7 @@ create table sys_user
    name                 varchar(16) not null comment '姓名',
    sex                  int not null comment '性别(0.男、1.女、2.其它)',
    age                  int not null comment '年龄',
+   Column_12            char(10),
    telephone            varchar(16) comment '联系电话',
    mobilephone          varchar(16) not null comment '移动电话',
    job                  int comment '职务(1.IT、2.农业、3.其它)',
