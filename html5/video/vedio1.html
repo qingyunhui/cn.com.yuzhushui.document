@@ -12,7 +12,7 @@
 	<p></p>
 	<h1>试看5秒钟</h1>
 
-	<video width="420" id="myVideo" height="460" poster="1.png" oncontextmenu="return false;"><!--如果video标签中有controls属性存在，则会video会使用浏览器自带的音频控件-->
+	<video width="420" id="myVideo" height="460" poster="2.png" oncontextmenu="return false;"><!--如果video标签中有controls属性存在，则会video会使用浏览器自带的音频控件-->
       <source src="http://www.runoob.com/try/demo_source/mov_bbb.mp4" type="video/mp4">
       <p>您的浏览器不支持Video标签。</p>
     </video>
@@ -69,9 +69,19 @@
 				//$(video).attr("poster","2.png");  //到了指定时间后，如何让它停止监听该事件呢？
 				video.pause();
 				$("h1").text("5秒钟视频完毕了。");
+				remove();
+				console.log("abcd");
 				video.currentTime=second;	//这里设置后，用户一旦快进就会跳转到试看时间的节点。
 			}
 		}, false);
+	}
+	
+	function remove(){
+		if(!video) getVideo();
+		video.removeEventListener("timeupdate",function(){
+			video.pause();
+			console.log("remove");
+		},false);
 	}
 	
 	$(function(){
