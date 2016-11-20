@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/11/18 13:42:18                          */
+/* Created on:     2016/11/20 15:07:43                          */
 /*==============================================================*/
 
 
@@ -9,6 +9,8 @@ drop table if exists sys_account;
 drop table if exists sys_account_role_rel;
 
 drop table if exists sys_attachment;
+
+drop table if exists sys_data;
 
 drop table if exists sys_dict;
 
@@ -44,7 +46,7 @@ create table sys_account
    comments             varchar(128) comment '备注',
    deleted              int not null comment '删除标识',
    primary key (account_id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_account comment '账号表';
 
@@ -65,7 +67,7 @@ create table sys_account_role_rel
    comments             varchar(128) comment '备注',
    deleted              int not null comment '删除标识',
    primary key (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_account_role_rel comment '账号角色关联表';
 
@@ -95,9 +97,27 @@ create table sys_attachment
    editor_id            int not null comment '修改人ID',
    deleted              int not null comment '删除标识',
    primary key (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_attachment comment '附件';
+
+/*==============================================================*/
+/* Table: sys_data                                              */
+/*==============================================================*/
+create table sys_data
+(
+   data_id              int not null,
+   target_table         varchar(32) not null,
+   target_id            int not null,
+   ctime                datetime not null,
+   creater              varchar(16) not null,
+   creater_id           int not null,
+   lose_efficacy_date   datetime not null,
+   comment              varchar(512),
+   primary key (data_id)
+);
+
+alter table sys_data comment '数据包(主要用来记录删除的表，定时删除)';
 
 /*==============================================================*/
 /* Table: sys_dict                                              */
@@ -119,7 +139,7 @@ create table sys_dict
    comments             varchar(128) comment '备注',
    deleted              int not null comment '删除标识',
    primary key (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_dict comment '字典表';
 
@@ -146,7 +166,7 @@ create table sys_menu
    comments             varchar(128) comment '备注',
    deleted              int not null comment '是否删除',
    primary key (menu_id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_menu comment '菜单表';
 
@@ -168,7 +188,7 @@ create table sys_message
    comments             varchar(128) comment '备注',
    deleted              int not null comment '删除标识',
    primary key (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_message comment '系统消息';
 
@@ -188,7 +208,7 @@ create table sys_opration_log
    editor               varchar(16) comment '修改人',
    editor_id            int comment '修改人ID',
    deleted              int comment '删除标识'
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_opration_log comment '操作日记';
 
@@ -213,7 +233,7 @@ create table sys_resource
    comments             varchar(128) comment '备注',
    deleted              int not null comment '是否删除',
    primary key (resource_id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_resource comment '资源表';
 
@@ -236,7 +256,7 @@ create table sys_role
    comments             varchar(128) comment '备注',
    deleted              int not null comment '是否删除',
    primary key (role_id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_role comment '角色表';
 
@@ -257,7 +277,7 @@ create table sys_role_resource_rel
    comments             varchar(128) comment '备注',
    deleted              int not null comment '删除标识',
    primary key (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_role_resource_rel comment '角色资源关联表';
 
@@ -271,7 +291,6 @@ create table sys_user
    name                 varchar(16) not null comment '姓名',
    sex                  int not null comment '性别(0.男、1.女、2.其它)',
    age                  int not null comment '年龄',
-   Column_12            char(10),
    telephone            varchar(16) comment '联系电话',
    mobilephone          varchar(16) not null comment '移动电话',
    job                  int comment '职务(1.IT、2.农业、3.其它)',
@@ -289,7 +308,7 @@ create table sys_user
    comments             varchar(128) comment '备注',
    deleted              int not null comment '删除标识',
    primary key (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 alter table sys_user comment '用户表';
 

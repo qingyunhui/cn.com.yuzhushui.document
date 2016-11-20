@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>hello word</title>
+<meta name="viewport"  content="width=device-width, initial-scale=1"><title>layer</title>
+<link type="text/css" href="need/layer.css"/>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="layer.js"></script>
+</head>
+	<a>my demo</a>
+    
+	<p></p>
+    
+	<h1>hello word</h1>
+
+	<div>
+    
+    	<div id="questions">
+        	<div name="ques1">
+            	<p>1、1+1=2</p>
+                <input type="radio" name="bm1">是</input>
+                <input type="radio" name="bm1">否</input>
+            </div>
+            
+            <div name="ques2">
+            	<p>2、2+1=2</p>
+                <input type="radio" name="bm2">是</input>
+                <input type="radio" name="bm2">否</input>
+            </div>
+            
+            <div name="ques3">
+            	<p>3、13+1=14</p>
+                <input type="radio" name="bm3">是</input>
+                <input type="radio" name="bm3">否</input>
+            </div>
+            
+            <div name="ques4">
+            	<p>4、1+1=33</p>
+                <input type="radio" name="bm4">是</input>
+                <input type="radio" name="bm4">否</input>
+            </div>
+            
+            <div name="ques5">
+            	<p>5、34+1=22</p>
+                <input type="radio" name="bm5">是</input>
+                <input type="radio" name="bm5">否</input>
+            </div>
+            
+            <div name="ques6">
+            	<p>6、1+5=6</p>
+                <input type="radio" name="bm6">是</input>
+                <input type="radio" name="bm6">否</input>
+            </div>
+            
+            <div name="ques7">
+            	<p>7、31+1=2</p>
+                <input type="radio" name="bm7">是</input>
+                <input type="radio" name="bm7">否</input>
+            </div>
+            
+            <div name="ques8">
+            	<p>8、41+1=2</p>
+                <input type="radio" name="bm8">是</input>
+                <input type="radio" name="bm8">否</input>
+            </div>
+            
+            <div name="ques9">
+            	<p>9、51+1=53</p>
+                <input type="radio" name="bm9">是</input>
+                <input type="radio" name="bm9">否</input>
+            </div>
+            
+            <div name="ques10">
+            	<p>10、91+1=92</p>
+                <input type="radio" name="bm10">是</input>
+                <input type="radio" name="bm10">否</input>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div>
+    	<div><h2>交卷请单击提交按钮。</h2></div>
+        <div><button id="commitBtn">提交</button></div>
+    <div>
+    
+    <div>
+    	
+    </div>
+    
+<body>
+<script>
+
+$(function(){
+	$("#commitBtn").click(function(){
+		var radioObj=$("input[name='bm']"); 
+
+		var count=$("input[type=radio]:checked").length ;
+		
+		if(count==0){
+			alert("小姑娘，你不能交白卷哦？");
+			return false;
+		}
+		
+		var obj=$("input[type=radio]");
+		
+		console.log("obj:"+obj);
+		
+		//console.log(count);
+	});	
+});
+	
+	
+</script>
+</body>
+</html>
