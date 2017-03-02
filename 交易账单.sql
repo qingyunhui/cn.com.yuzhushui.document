@@ -21,3 +21,15 @@ CREATE TABLE `sys_bills` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易账单表';
 
+create table sys_fund_pool 
+(
+   id                   integer                        not null COMMENT '主键id',
+   account_id           integer                        not null COMMENT '资金池拥有者id',
+   gold                 bigint                         not null COMMENT '现金',
+   creater              varchar(16)                    null COMMENT '创建人',
+   creater_id           varchar(16)                    null COMMENT '创建人id',
+   ctime                datetime                       null COMMENT '创建时间',
+   comments             varchar(128)                   null COMMENT '备注',
+   deleted              integer                        not null COMMENT '删除标识',
+   constraint PK_SYS_FUND_POOL primary key clustered (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资金池';
